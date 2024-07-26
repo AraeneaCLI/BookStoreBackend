@@ -7,26 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Books {
-  id          String   @default(cuid()) @id
+model users {
+  id          Int      @id @default(autoincrement())
+  fname       String   @db.VarChar(50)
+  lname       String   @db.VarChar(50)
+  email       String   @unique
+  password    String   @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  books       books[]
+}
+
+model books {
+  id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)
   subtitle    String   @db.VarChar(255)
   author      String   @db.VarChar(255)
   description String   @db.Text
   image       Bytes
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId      String
-  user        Users    @relation(fields: [userId], references: [id])
-}
-
-model Users {
-  id          String   @default(cuid()) @id
-  fname       String   @db.VarChar(50)
-  lname       String   @db.VarChar(50)
-  email       String   @unique
-  password    String   @db.VarChar(255)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  books       Books[]
+  userId      Int
+  user        users    @relation(fields: [userId], references: [id])
 }
