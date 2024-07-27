@@ -4,8 +4,8 @@
   "description": "PostgresBackend",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.mjs",
-    "start": "nodemon index.mjs"
+    "test": "node index.mjs",
+    "start": "node index.mjs"
   },
   "author": "Yash Mankar",
   "license": "ISC",
